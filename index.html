@@ -1,0 +1,557 @@
+<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>无人机矿产资源可视化</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery.js"></script>
+    <script>
+        $(function() {
+            $('.myscroll').myScroll({
+                speed: 60, //数值越大，速度越慢
+                rowHeight: 38 //li的高度
+            });
+        })
+
+        $(document).ready(function() {
+            var whei = $(window).width()
+            $("html").css({
+                fontSize: whei / 22
+            });
+            $(window).resize(function() {
+                var whei = $(window).width();
+                $("html").css({
+                    fontSize: whei / 22
+                })
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <div class="main">
+
+        <!--头部-->
+        <div class="header">
+            <div class="header-left" id="time"></div>
+            <div class="header-cen">
+                <h1>无人机矿产资源可视化</h1>
+            </div>
+            <div class="header-right"></div>
+        </div>
+
+        <!--中间-->
+        <div class="content">
+            <!--左边-->
+            <div class="content-left fl">
+                <!--左上-->
+                <div class="left-top">
+                    <div class="title">
+                        <span>基本信息</span>
+                    </div>
+                    <div class="list">
+                        <p>基于Hive的无人机矿产资源勘探数据的可视化分析系统，是一个结合了Hive数据仓库与可视化工具的系统。它利用Hive处理大规模数据，并通过可视化工具展示分析结果，以帮助用户更好地理解和利用无人机收集的矿产资源勘探数据。</p>
+                        <ul>
+                            <li>面积：960万平方公里</li>
+                            <li>矿产基地：23处</li>
+                            <li>年总产量：451万吨</li>
+                            <li>年总产值：6.32亿</li>
+                        </ul>
+                    </div>
+                </div>
+                <!--左中-->
+                <div class="left-center">
+                    <div class="title">
+                        <span>矿产类别</span>
+                    </div>
+                    <div class="allnav" id="ceshi"></div>
+                </div>
+                <!--左下-->
+                <div class="left-bottom">
+                    <div class="title">
+                        <span>产量/面积</span>
+                    </div>
+                    <div class="allnav" id="ceshi2"></div>
+                </div>
+            </div>
+            <!--中间-->
+            <div class="content-center fl">
+                <!--头部-->
+                <div class="center-top">
+                    <div class="top-title">
+                        <ul>
+                            <li>
+                                <p>矿产基地</p>
+                                <span>2</span>
+                                <span>3</span>
+                                <!-- <span>5</span> -->
+                                <b>个</b>
+                            </li>
+                            <li>
+                                <p>无人机已接入</p>
+                                <span>9</span>
+                                <span>0</span>
+                                <b>%</b>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="top-bottom">
+                        <div class="allnav" id="ceshi8"></div>
+                    </div>
+
+                </div>
+                <!--底部-->
+                <div class="center-bottom">
+                    <div class="bottom-left fl">
+                        <div class="allnav" id="ceshi6"></div>
+                    </div>
+                    <div class="bottom-right fr">
+                        <div class="allnav" id="ceshi7" style="width: 100%;height: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+            <!--右边-->
+            <div class="content-right fr">
+                <!--右上-->
+                <div class="right-top">
+                    <!--选项卡内容-->
+                    <div id="tab_header">
+                        <ul>
+                            <li class="selected">无人机信息</li>
+                            <li>基地信息</li>
+                        </ul>
+                    </div>
+                    <!--内容-->
+                    <div id="tab_content">
+                        <div class="dom" style="display: block">
+                            <ul>
+                                <li>
+                                    <p>大疆</p>
+                                    <span>剩余电量86%</span>
+                                    
+                                </li>
+                                <li>
+                                    <p>JOUAV纵横</p>
+                                    <span>剩余电量15%</span>
+                                </li>
+                                <li>
+                                    <p>亿航Ehang</p>
+                                    <span>剩余电量78%</span>
+                                </li>
+                            </ul>
+                            <div class="list-t">
+                                <ul>
+                                    <li>
+                                        <span>维修中</span>
+                                        <p>2个</p>
+                                    </li>
+                                    <li>
+                                        <span>售后中</span>
+                                        <p>7个</p>
+                                    </li>
+                                    <li>
+                                        <span>充电中</span>
+                                        <p>6个</p>
+                                    </li>
+                                    <li>
+                                        <span>待机中</span>
+                                        <p>12个</p>
+                                    </li>
+                                    <li>
+                                        <span>勘测中</span>
+                                        <p>18个</p>
+                                    </li>
+                                    <!-- <li>
+                                        <span>损坏</span>
+                                        <p>商铺</p>
+                                    </li> -->
+                                </ul>
+
+                            </div>
+                        </div>
+                        <div class="dom" style="display: none">
+                            <div class="listStyle">
+
+                                <span>仓库：<strong>23</strong>个</span>
+                                <span>供应企业：<strong>36</strong>家</span>
+                                <span>经销商：<strong>540</strong>个</span>
+                                <span>供应链：<strong>15</strong>条</span>
+                                <span>加工基地：<strong>20</strong>个</span>
+                                <span>售后卸载：<strong>29</strong>家</span>
+                             
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--选项卡内容-->
+                </div>
+                <!--右中-->
+                <div class="right-center">
+                    <div class="title">
+                        <span>销量排行</span>
+                    </div>
+
+                    <div class="echart wenzi">
+                        <div class="gun">
+                            <span>名称</span>
+                            <span>同比</span>
+                            <span>销量</span>
+                        </div>
+                        <div id="FontScroll" class="myscroll">
+                            <ul>
+                              <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>1. 铜矿</b>  
+            </span>  
+            <span>2.5%</span>  
+            <span>85吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>2. 铅锌矿</b>  
+            </span>  
+            <span>1.2%</span>  
+            <span>62吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>3. 锡矿</b>  
+            </span>  
+            <span>3.7%</span>  
+            <span>120吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>4. 钨矿</b>  
+            </span>  
+            <span>2.1%</span>  
+            <span>93吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>5. 钼矿</b>  
+            </span>  
+            <span>4.3%</span>  
+            <span>150吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>6. 汞矿</b>  
+            </span>  
+            <span>0.9%</span>  
+            <span>38吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>7. 铀矿</b>  
+            </span>  
+            <span>0.5%</span>  
+            <span>22吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>8. 稀土矿</b>  
+            </span>  
+            <span>6.2%</span>  
+            <span>250吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>9. 铌矿</b>  
+            </span>  
+            <span>1.5%</span>  
+            <span>65吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>10. 锑矿</b>  
+            </span>  
+            <span>1.8%</span>  
+            <span>41吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>11. 金矿</b>  
+            </span>  
+            <span>0.3%</span>  
+            <span>13吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>12. 银矿</b>  
+            </span>  
+            <span>2.9%</span>  
+            <span>125吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>13. 铂矿</b>  
+            </span>  
+            <span>0.2%</span>  
+            <span>9吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>14. 钯矿</b>  
+            </span>  
+            <span>0.4%</span>  
+            <span>18吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>15. 铑矿</b>  
+            </span>  
+            <span>0.1%</span>  
+            <span>5吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>16. 铱矿</b>  
+            </span>  
+            <span>0.05%</span>  
+            <span>2吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>17. 锇矿</b>  
+            </span>  
+            <span>0.03%</span>  
+            <span>1吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>18. 钌矿</b>  
+            </span>  
+            <span>0.08%</span>  
+            <span>4吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>19. 铁矿</b>  
+            </span>  
+            <span>5.6%</span>  
+            <span>300吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>20. 锰矿</b>  
+            </span>  
+            <span>3.4%</span>  
+            <span>145吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>21. 铬矿</b>  
+            </span>  
+            <span>2.3%</span>  
+            <span>100吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>22. 镍矿</b>  
+            </span>  
+            <span>4.1%</span>  
+            <span>175吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>23. 钴矿</b>  
+            </span>  
+            <span>1.9%</span>  
+            <span>82吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>24. 钒矿</b>  
+            </span>  
+            <span>1.1%</span>  
+            <span>48吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>25. 钛矿</b>  
+            </span>  
+            <span>3.2%</span>  
+            <span>135吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>26. 锆矿</b>  
+            </span>  
+            <span>0.7%</span>  
+            <span>30吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>27. 铪矿</b>  
+            </span>  
+            <span>0.02%</span>  
+            <span>1吨</span>  
+        </div>  
+    </li>  
+    <li>  
+        <div class="fontInner clearfix">  
+            <span>  
+                <b>28. 镓矿</b>  
+            </span>  
+            <span>0.01%</span>  
+            <span>0.5吨</span>  
+        </div>  
+    </li> 
+                                
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--右下-->
+                <div class="right-bottom">
+                    <div class="title">
+                        <span>出入库统计</span>
+                    </div>
+                    <div class="right-bottom-t">
+                        <div class="b-left" id="ceshi3"></div>
+                        <div class="b-cent" id="ceshi4"></div>
+                        <div class="b-right" id="ceshi5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <script src="js/echarts.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <!--<script src="js/data01.js"></script>-->
+    <!--<script src="js/mapIndex.js"></script>-->
+
+
+    <script src="js/echart.js"></script>
+    <script src="js/fontscroll.js"></script>
+    <script src="js/china.js"></script>
+
+
+
+
+
+    <script>
+        //顶部时间
+        function getTime() {
+            var myDate = new Date();
+            var myYear = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
+            var myMonth = myDate.getMonth() + 1; //获取当前月份(0-11,0代表1月)
+            var myToday = myDate.getDate(); //获取当前日(1-31)
+            var myDay = myDate.getDay(); //获取当前星期X(0-6,0代表星期天)
+            var myHour = myDate.getHours(); //获取当前小时数(0-23)
+            var myMinute = myDate.getMinutes(); //获取当前分钟数(0-59)
+            var mySecond = myDate.getSeconds(); //获取当前秒数(0-59)
+            var week = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+            var nowTime;
+
+            nowTime = myYear + '-' + fillZero(myMonth) + '-' + fillZero(myToday) + '&nbsp;&nbsp;' + fillZero(myHour) + ':' + fillZero(myMinute) + ':' + fillZero(mySecond) + '&nbsp;&nbsp;' + week[myDay] + '&nbsp;&nbsp;';
+            //console.log(nowTime);
+            $('#time').html(nowTime);
+        };
+
+        function fillZero(str) {
+            var realNum;
+            if (str < 10) {
+                realNum = '0' + str;
+            } else {
+                realNum = str;
+            }
+            return realNum;
+        }
+        setInterval(getTime, 1000);
+    </script>
+    <script>
+        $(function() {
+            var allLis = document.getElementById("tab_header").getElementsByTagName("li");
+            var allDom = document.getElementById("tab_content").getElementsByClassName("dom");
+
+            // console.log(allLis, allDom);
+
+            // 2. 遍历监听
+            for (var i = 0; i < allLis.length; i++) {
+                var li = allLis[i];
+                li.index = i;
+
+                li.onclick = function() {
+                    console.log(i);
+                    for (var j = 0; j < allLis.length; j++) {
+                        allLis[j].className = '';
+                        allDom[j].style.display = 'none';
+                    }
+
+                    this.className = 'selected';
+                    allDom[this.index].style.display = 'block';
+
+                }
+            }
+        })
+    </script>
+
+
+</body>
+
+</html>
